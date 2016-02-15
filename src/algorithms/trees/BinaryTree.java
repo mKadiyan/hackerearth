@@ -245,7 +245,7 @@ public class BinaryTree<T>
     {
         if (root == null)
             return false;
-        if ((root.left() != null && (int) root.left().data() == data) || (root.right() != null && (int) root.right().data() == data)
+        if ((root.left() != null && (int) (Integer) root.left().data() == data) || (root.right() != null && (int) (Integer) root.right().data() == data)
             || printAllancestors(root.left(), data) || printAllancestors(root.right(), data))
         {
             System.out.print(root.data() + " ");

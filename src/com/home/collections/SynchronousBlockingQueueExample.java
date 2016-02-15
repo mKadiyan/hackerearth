@@ -13,7 +13,7 @@ public class SynchronousBlockingQueueExample
 {
     public static void main(String[] args)
     {
-        BlockingQueue<Integer> queue = new SynchronousQueue<>();
+        final BlockingQueue<Integer> queue = new SynchronousQueue<>();
         
         Thread producer = new Thread(new Runnable()
         {
