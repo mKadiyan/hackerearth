@@ -18,7 +18,7 @@ public class Lcs {
 		else
 		{
 			String xT = findLcs(x, y.substring(0,lengthY-1));
-			String yT = findLcs(x.substring(0,lengthX-1), y.substring(0,lengthY-1));
+			String yT = findLcs(x.substring(0,lengthX-1), y);
 			return xT.length() > yT.length() ? xT:yT;
 		}
 			
