@@ -1,4 +1,7 @@
 package algorithms.dynamicprogramming;
+
+import algorithms.sorting.Utility;
+
 public class MatrixMultiplicationCost {
 
     public int findCost(int arr[]){
@@ -16,12 +19,14 @@ public class MatrixMultiplicationCost {
                 }
             }
         }
+        Utility.print(temp);
+        
         return temp[0][arr.length-1];
     }
     
     public static void main(String args[]){
         MatrixMultiplicationCost mmc = new MatrixMultiplicationCost();
-        int arr[] = {4,2,3,5,3};
+        int arr[] = {2,3,6,4, 5};
         int cost = mmc.findCost(arr);
         System.out.print(cost);
     }
