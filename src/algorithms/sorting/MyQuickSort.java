@@ -1,89 +1,80 @@
 package algorithms.sorting;
 
+
 public class MyQuickSort
 {
-    
-    private int array[];
-    private int length;
     
     public static void main(String a[])
     {
         
-        MyQuickSort sorter = new MyQuickSort();
-        int[] input = { 24, 2, 45, 20, 56, 75, 2, 56, 99, 53, 12 };
-        sorter.print(input);
-        sorter.sort(input);
-        sorter.print(input);
-    }
-    
-    private void print(int[] input)
-    {
-        for (int i : input)
-        {
-            System.out.print(i);
-            System.out.print(" ");
-        }
-        System.out.println();
-    }
-    
-    public void sort(int[] inputArr)
-    {
+        // int[] input = { 10, 12, 4, 6, 3, 9, 1 };
+        // quickSort(input, 0, input.length - 1);
+        // Utility.print(input);
         
-        if (inputArr == null || inputArr.length == 0)
-        {
-            return;
-        }
-        this.array = inputArr;
-        length = inputArr.length;
-        quickSort(0, length - 1);
+        int[] input1 = { 10, 12, 4, 6, 3, 9, 1 };
+        System.out.println(kthElement(input1, 0, input1.length - 1, 7));
+
     }
     
-    private void quickSort(int lowerIndex, int higherIndex)
+    private static int kthElement(int[] input, int low, int high, int k)
     {
+        if (k > 0)
+        {
+            int pivot = getPivot(input, low, high);
+            Utility.print(input);
+            System.out.println("low = " + low + " ,high = " + high + " , k = " + k + ", pivot = " + pivot);
+            if (pivot + 1 == k)
+                return input[pivot];
+            else if (pivot > k - 1)
+                return kthElement(input, low, pivot - 1, k);
+            return kthElement(input, pivot + 1, high, k - pivot - 1);
+            
+        }
+        return Integer.MAX_VALUE;
+    }
+    private static void quickSort(int[] input, int low, int high)
+    {
+        if (high > low)
+        {
+            System.out.println("low = " + low + " ,high = " + high);
+            int pivot = getPivot(input, low, high);
+            quickSort(input, low, pivot - 1);
+            quickSort(input, pivot + 1, high);
+
+        }
         
-        int i = lowerIndex;
-        int j = higherIndex;
-        // calculate pivot number, I am taking pivot as middle index number
-        int pivot = array[lowerIndex + (higherIndex - lowerIndex) / 2];
-        // Divide into two arrays
-        while (i <= j)
-        {
-            /**
-             * In each iteration, we will identify a number from left side which
-             * is greater then the pivot value, and also we will identify a number
-             * from right side which is less then the pivot value. Once the search
-             * is done, then we exchange both numbers.
-             */
-            while (array[i] < pivot)
-            {
-                i++;
-            }
-            while (array[j] > pivot)
-            {
-                j--;
-            }
-            if (i <= j)
-            {
-                exchangeNumbers(i, j);
-                // move index to next position on both sides
-                i++;
-                j--;
-                System.out.println("pivot = " + pivot);
-                print(array);
-            }
-        }
-        // call quickSort() method recursively
-        if (lowerIndex < j)
-            quickSort(lowerIndex, j);
-        if (i < higherIndex)
-            quickSort(i, higherIndex);
     }
     
-    private void exchangeNumbers(int i, int j)
+    private static int getPivot(int[] input, int low, int high)
     {
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        int pivot = low;
+        int start = low + 1;
+        int end = high;
+        while (start <= end)
+        {
+            if (input[pivot] >= input[start])
+            {
+                start++;
+                continue;
+            }
+            if (input[end] > input[pivot])
+            {
+                end--;
+                continue;
+            }
+            swap(input, start++, end--);
+            Utility.print(input);
+        }
+        swap(input, pivot, end);
+        return end;
+    }
+    
+    private static void swap(int[] input, int start, int end)
+    {
+        int temp = input[start];
+        input[start] = input[end];
+        input[end] = temp;
+        
     }
     
 }
